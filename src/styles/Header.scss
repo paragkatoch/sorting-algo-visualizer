@@ -1,0 +1,92 @@
+.MainHeader {
+	display: flex;
+	align-items: center;
+
+	width: 100vw;
+	height: 80px;
+
+	background-color: #171e60;
+
+	.app_name {
+		min-width: 315px;
+		margin-left: 50px;
+
+		h1 {
+			font-family: Lora;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 21px;
+			line-height: 27px;
+
+			letter-spacing: 0.05em;
+			color: #2d9cdb;
+			text-shadow: 0px 0px 2px #ffffff;
+			filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.3));
+		}
+	}
+	.divider {
+		width: calc(79.5vw - 365px);
+		min-width: 589px;
+		height: 2px;
+	}
+	.start_container {
+		display: flex;
+		justify-content: center;
+
+		width: 20.5vw;
+		min-width: 246px;
+
+		button {
+			width: 68px;
+			height: 29px;
+
+			border: 1px solid #0c438d;
+			border-radius: 5px;
+
+			p {
+				font-size: 14px;
+				line-height: 19px;
+				text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.MainHeader {
+		justify-content: space-between;
+
+		.divider {
+			display: none;
+		}
+		.start_container {
+			width: 246px;
+		}
+	}
+}
+
+@media screen and (max-width: 910px) {
+	.MainHeader .start_container {
+		width: 27.2vw;
+		min-width: 102px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.MainHeader {
+		.app_name {
+			min-width: 235px;
+			margin-left: 20px;
+			h1 {
+				font-size: 16px;
+			}
+		}
+		.start_container button {
+			width: 60px;
+			height: 25px;
+			p {
+				font-size: 13px;
+			}
+		}
+	}
+}
