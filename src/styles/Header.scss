@@ -40,9 +40,6 @@
 			width: 68px;
 			height: 29px;
 
-			border: 1px solid #0c438d;
-			border-radius: 5px;
-
 			p {
 				font-size: 14px;
 				line-height: 19px;
@@ -66,19 +63,21 @@
 }
 
 @media screen and (max-width: 910px) {
-	.MainHeader .start_container {
-		width: 27.2vw;
-		min-width: 102px;
+	.MainHeader {
+		.start_container {
+			width: 27.2vw;
+			min-width: 102px;
+		}
 	}
 }
 
 @media screen and (max-width: 600px) {
 	.MainHeader {
 		.app_name {
-			min-width: 235px;
+			min-width: 221px;
 			margin-left: 20px;
 			h1 {
-				font-size: 16px;
+				font-size: 15px;
 			}
 		}
 		.start_container button {

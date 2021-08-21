@@ -4,26 +4,30 @@ import { AppContext, inActiveButtonStyle } from "../utils";
 import "../styles/Header.scss";
 
 export default function Header() {
+	console.log("Header");
+	const { algoType, running, dispatch } = useContext(AppContext);
+
 	const [buttonStyle, setStyle] = useState(inActiveButtonStyle);
-	const {
-		state: { algoType },
-		dispatch,
-	} = useContext(AppContext);
 	const ref = useRef();
 
 	useEffect(() => {
-		console.log("I am Header.js");
-	}, []);
+		if (algoType === "" && Object.keys(buttonStyle).length === 0) {
+			setStyle(inActiveButtonStyle);
+		} else if (algoType !== "" && Object.keys(buttonStyle).length > 0) {
+			setStyle({});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [algoType]);
 
 	useEffect(() => {
-		console.log(algoType);
-		algoType !== "" && setStyle({});
-	}, [algoType]);
+		running
+			? (ref.current.innerText = "stop")
+			: (ref.current.innerText = "start");
+	}, [running]);
 
 	const handleChange = () => {
 		const text = ref.current.innerText;
 		dispatch({ type: text });
-		ref.current.innerText = text === "start" ? "stop" : "start";
 	};
 
 	return (
