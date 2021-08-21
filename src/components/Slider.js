@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 
-export default function Slider(props) {
-	const [state, setState] = useState(props.value);
-
+const Slider = React.memo(({ name, value, handleSliderChange }) => {
+	console.log("Slider");
 	function onInput(e) {
-		setState(e.target.value);
+		const { className, value } = e.target;
+		handleSliderChange(className, value);
 	}
 
 	return (
 		<>
-			<input type="range" min="1" max="100" value={state} onInput={onInput} />
+			<input
+				className={name}
+				type="range"
+				min="1"
+				max="10"
+				value={value}
+				onInput={onInput}
+			/>
 		</>
 	);
-}
+});
+
+export default Slider;
