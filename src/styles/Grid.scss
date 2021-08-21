@@ -1,0 +1,40 @@
+.Grid {
+	width: 79.5vw;
+	height: 100%;
+	background-color: #343d8d;
+
+	display: flex;
+	justify-content: center;
+
+	.grid_container {
+		position: relative;
+		width: 920px;
+		margin: 0 17px;
+		// border: 1px solid blue;
+		height: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.ruler {
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			background-color: #1c62a3;
+		}
+		.arrayBars {
+		}
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.Grid {
+		width: calc(100vw - 246px);
+	}
+}
+@media screen and (max-width: 910px) {
+	.Grid {
+		min-width: 100vw;
+	}
+}
