@@ -5,7 +5,7 @@ import "../styles/Controller.scss";
 import { AppContext, inActiveButtonStyle } from "../utils";
 
 export default function Controller() {
-	console.log("Controller");
+	// console.log("Controller");
 
 	const [deadState, setDeadState] = useState({});
 	const { running, size, speed, algoType, dispatch } = useContext(AppContext);

@@ -5,7 +5,7 @@ import Grid from "./Grid";
 import "../styles/Main.scss";
 
 export default function Main() {
-	console.log("Main");
+	// console.log("Main");
 	return (
 		<main className="Main">
 			<Grid />

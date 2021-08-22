@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Slider = React.memo(
 	({ name, value, handleSliderChange, min = 1, max = 10 }) => {
-		console.log("Slider");
+		// console.log("Slider");
 		function onInput(e) {
 			const { className, value } = e.target;
 			handleSliderChange(className, value);

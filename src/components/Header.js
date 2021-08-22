@@ -4,7 +4,7 @@ import { AppContext, inActiveButtonStyle } from "../utils";
 import "../styles/Header.scss";
 
 export default function Header() {
-	console.log("Header");
+	// console.log("Header");
 	const { algoType, running, dispatch } = useContext(AppContext);
 
 	const [buttonStyle, setStyle] = useState(inActiveButtonStyle);

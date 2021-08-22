@@ -1,25 +1,26 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/Grid.scss";
-import { AppContext } from "../utils";
+import {
+	AppContext,
+	arrayGen,
+	getBarHeight,
+	getBarMargin,
+	getBarWidth,
+	setHeightValue,
+} from "../utils";
 
 export default function Grid() {
-	console.log("Grid");
-	const [array, setArray] = useState([]);
 	const [gridSize, setGridSize] = useState();
 	const gridRef = useRef();
-	const { newArray, size, speed, algoType, running, dispatch } =
-		useContext(AppContext);
+	const { newArray, size, dispatch } = useContext(AppContext);
 
 	useEffect(() => {
 		if (newArray) {
-			setArray(arrayGen(size));
+			dispatch({ type: "array", data: arrayGen(size) });
 			dispatch({ type: "reset" });
 		}
 	}, [newArray, size, dispatch]);
 
-	useEffect(() => {
-		console.log("update");
-	}, [array]);
 	useEffect(() => {
 		window.addEventListener("resize", setWidthHeight);
 		setWidthHeight();
@@ -28,12 +29,6 @@ export default function Grid() {
 			window.removeEventListener("resize", setWidthHeight);
 		};
 	}, []);
-
-	useEffect(() => {
-		if (running) {
-			bubbleSort(array, array.length, setArray);
-		}
-	}, [running]);
 
 	const setWidthHeight = () => {
 		const { clientWidth, clientHeight } = gridRef.current;
@@ -45,48 +40,83 @@ export default function Grid() {
 			<div ref={gridRef} className="grid_container">
 				<div className="ruler"></div>
 				<div className="arrayBars">
-					{array.map((bar, i, bars) => {
-						return (
-							<div
-								className="bar"
-								key={i}
-								id={`${bar} ${gridSize.clientHeight} ${size}`}
-								style={{
-									height: `${getBarHeight(bar, size, gridSize.clientHeight)}px`,
-									width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
-									backgroundColor: "#1C62A3",
-									margin: `${getBarMargin(
-										bars.length,
-										gridSize.clientWidth
-									)}px`,
-								}}
-							>
-								{setHeightValue(bar, bars.length, gridSize.clientWidth)}
-							</div>
-						);
-					})}
+					<ArrayBars {...{ gridSize }} />
+					{/* <BubbleSorter /> */}
 				</div>
 			</div>
 		</div>
 	);
 }
 
-const getBarHeight = (bar, size, height) =>
-	(bar / (Math.ceil(size / 3) * 100)) * (height * 0.7);
+const ArrayBars = ({ gridSize }) => {
+	const [i, setI] = useState(-1);
+	const [j, setJ] = useState(-1);
+	const { array, size, running, dispatch } = useContext(AppContext);
+	const length = array.length;
 
-const getBarWidth = (length, width) => (width * 0.5) / length;
+	useEffect(() => {
+		console.log("triggered");
+		if (running) {
+			setI(0);
+		}
+	}, [running]);
 
-const getBarMargin = (length, width) => Math.min((width * 0.24) / length, 20);
+	useEffect(() => {
+		console.log(i, j);
+	}, [i, j]);
 
-const setHeightValue = (bar, length, width) => {
-	const barWidth = getBarWidth(length, width);
-	let size = 20;
-	if (barWidth > 25) {
-		if (barWidth < 40) size = 12;
-		else if (barWidth < 80) size = 16;
-		return <p style={{ fontSize: `${size}px` }}>{bar}</p>;
-	}
-	return null;
+	useEffect(() => {
+		if (running) {
+			if (i >= length - 1) {
+				dispatch({ type: "stop" });
+			}
+			setTimeout(() => {
+				setJ(0);
+			}, 200);
+		}
+	}, [i]);
+
+	useEffect(() => {
+		if (running && i >= 0) {
+			if (j >= length - i - 1) {
+				setI((prev) => prev + 1);
+			} else {
+				if (array[j] > array[j + 1]) {
+					let arr = array;
+					let temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+
+					dispatch({ type: "array", data: arr });
+				}
+				setTimeout(() => {
+					setJ((prev) => prev + 1);
+				}, 200);
+			}
+		}
+	}, [j]);
+
+	return (
+		<>
+			{array.map((bar, i, bars) => {
+				return (
+					<div
+						className="bar"
+						key={i}
+						id={`${bar} ${gridSize.clientHeight} ${size}`}
+						style={{
+							height: `${getBarHeight(bar, size, gridSize.clientHeight)}px`,
+							width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
+							backgroundColor: "#1C62A3",
+							margin: `${getBarMargin(bars.length, gridSize.clientWidth)}px`,
+						}}
+					>
+						{setHeightValue(bar, bars.length, gridSize.clientWidth)}
+					</div>
+				);
+			})}
+		</>
+	);
 };
 
 /*
@@ -114,31 +144,3 @@ const setHeightValue = (bar, length, width) => {
 	10 - 300
 	10 - 400
 */
-const arrayGen = (size) => {
-	let array = [];
-	let range = (size > 5 ? size + 2 : size + 3) * size;
-
-	for (let i = 1; i <= range; i++) {
-		array.push(
-			Math.floor(10 + Math.random() * (Math.ceil(size / 3) * 100 - 10))
-		);
-	}
-	return array;
-};
-
-const bubbleSort = async (array, n, setArray) => {
-	let arr = array;
-	console.log("start", arr, arr[0], arr[1], arr[2], arr[3]);
-
-	var i, j;
-	for (i = 0; i < n - 1; i++)
-		for (j = 0; j < n - i - 1; j++) {
-			if (arr[j] > arr[j + 1]) {
-				let temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-				setArray(arr);
-			}
-		}
-	console.log("finish", arr);
-};

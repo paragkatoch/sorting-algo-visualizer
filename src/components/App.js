@@ -6,16 +6,21 @@ import Header from "./Header";
 import Main from "./Main";
 
 export default function App() {
-	console.log("App");
+	// console.log("App");
 	const [newArray, setNewArray] = useState(true);
 	const [algoType, setAlgoType] = useState("");
 	const [size, setSize] = useState(4);
 	const [speed, setSpeed] = useState(4);
 	const [running, setRunning] = useState(false);
+	const [sort, setSort] = useState(true);
+	const [array, setArray] = useState([]);
 
 	const dispatch = ({ type, data }) => {
 		console.log("dispatch", type, data);
 		switch (type) {
+			case "sort":
+				setSort((prev) => !prev);
+				break;
 			case "reset":
 				if (!running) setNewArray((prev) => !prev);
 				break;
@@ -37,6 +42,9 @@ export default function App() {
 			case "stop":
 				if (algoType !== "") setRunning(false);
 				break;
+			case "array":
+				if (!running) setArray(data);
+				break;
 			default:
 				console.log("What are you doing?");
 		}
@@ -50,7 +58,7 @@ export default function App() {
 	return (
 		<div className="App">
 			<AppContext.Provider
-				value={{ newArray, size, speed, running, algoType, dispatch }}
+				value={{ newArray, size, speed, running, algoType, dispatch, array }}
 			>
 				<Header />
 				<Main />
