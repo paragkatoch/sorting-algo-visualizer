@@ -1,64 +1,22 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import "../styles/Grid.scss";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from "react";
 import {
 	AppContext,
-	arrayGen,
 	getBarHeight,
 	getBarMargin,
 	getBarWidth,
 	setHeightValue,
 } from "../utils";
 
-export default function Grid() {
-	const [gridSize, setGridSize] = useState();
-	const gridRef = useRef();
-	const { newArray, size, dispatch } = useContext(AppContext);
-
-	useEffect(() => {
-		if (newArray) {
-			dispatch({ type: "array", data: arrayGen(size) });
-			dispatch({ type: "reset" });
-		}
-	}, [newArray, size, dispatch]);
-
-	useEffect(() => {
-		window.addEventListener("resize", setWidthHeight);
-		setWidthHeight();
-
-		return () => {
-			window.removeEventListener("resize", setWidthHeight);
-		};
-	}, []);
-
-	const setWidthHeight = () => {
-		const { clientWidth, clientHeight } = gridRef.current;
-		setGridSize({ clientWidth, clientHeight });
-	};
-
-	return (
-		<div className="Grid">
-			<div ref={gridRef} className="grid_container">
-				<div className="ruler"></div>
-				<div className="arrayBars">
-					<ArrayBars {...{ gridSize }} />
-					{/* <BubbleSorter /> */}
-				</div>
-			</div>
-		</div>
-	);
-}
-
-const ArrayBars = ({ gridSize }) => {
+export default function ArrayBars({ gridSize }) {
 	const [i, setI] = useState(-1);
 	const [j, setJ] = useState(-1);
 	const { array, size, running, dispatch } = useContext(AppContext);
+
 	const length = array.length;
 
 	useEffect(() => {
-		console.log("triggered");
-		if (running) {
-			setI(0);
-		}
+		if (running) setI(0);
 	}, [running]);
 
 	useEffect(() => {
@@ -96,6 +54,10 @@ const ArrayBars = ({ gridSize }) => {
 		}
 	}, [j]);
 
+	return <ArrayBarsUI {...{ array, gridSize, size }} />;
+}
+
+function ArrayBarsUI({ array, gridSize, size }) {
 	return (
 		<>
 			{array.map((bar, i, bars) => {
@@ -117,30 +79,16 @@ const ArrayBars = ({ gridSize }) => {
 			})}
 		</>
 	);
-};
+}
 
 /*
-	size
-	1 - 4
-	2 - 10
-	3 - 18
-	4 - 28
-	5 - 35
-	6 - 48
-	7 - 63
-
+	Array size
 	4*1 5*2 6*3 7*4 7*5	
 	8*6 9*7 10*8 11*9 12*10
 	
-	length
-	10 - 100
-	10 - 100
-	10 - 100
-	10 - 200
-	10 - 200
-	10 - 200
-	10 - 300
-	10 - 300
-	10 - 300
-	10 - 400
+	array range
+	(1,2,3) : 10 - 100
+	(3,4,5) : 10 - 200
+	(6,7,8) : 10 - 300
+	(9,10)  : 10 - 400
 */

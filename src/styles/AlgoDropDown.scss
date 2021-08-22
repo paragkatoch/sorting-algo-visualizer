@@ -1,0 +1,84 @@
+.algoDropDown_container {
+	position: relative;
+	margin-top: 45px;
+	width: 185px;
+
+	.algoDropDown_button,
+	.algoDropDown_options,
+	.algoDropDown_options button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		width: 185px;
+		min-height: 29px;
+		padding: 0 10px 0 19px;
+	}
+
+	.algoDropDown_button {
+		justify-content: space-between;
+		p {
+			font-size: 14px;
+		}
+	}
+
+	.algoDropDown_options {
+		display: none;
+		flex-direction: column;
+
+		height: fit-content;
+		padding: 0;
+		margin-top: 5px;
+		border-radius: 5px;
+
+		box-shadow: 0 0 6px 0px #ffffff;
+
+		.options {
+			list-style-type: none;
+			text-align: center;
+			margin: 5px;
+
+			li {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				button {
+					padding: 5px 0;
+
+					font-family: Open Sans;
+					font-style: italic;
+					font-weight: normal;
+					font-size: 14px;
+					letter-spacing: 0.1em;
+
+					color: #2e9cdb;
+					filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.5));
+					text-shadow: 0px 0px 2px #0c438d;
+
+					&:active {
+						filter: drop-shadow(0px 0px 6px rgba(255, 255, 255, 0));
+					}
+				}
+				@media (hover: hover) and (pointer: fine) {
+					button:hover {
+						filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.7));
+					}
+				}
+				hr {
+					width: 120px;
+					height: 0.5px;
+					margin: 0;
+
+					background: #2e9cdb;
+					border: none;
+					box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+				}
+			}
+		}
+	}
+}
+
+.algoDropDown_container_interaction#options {
+	display: flex;
+}

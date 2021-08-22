@@ -1,5 +1,12 @@
 .App {
 	height: 100vh;
+
+	.Main {
+		display: flex;
+		width: 100vw;
+		height: calc(100vh - 80px);
+		overflow: hidden;
+	}
 }
 
 .button-style {
