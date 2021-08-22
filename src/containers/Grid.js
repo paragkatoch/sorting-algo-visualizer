@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import ArrayBars from "../components/ArrayBars";
+import ArrayBars from "../containers/ArrayBars";
 
 import "../styles/Grid.scss";
 import { AppContext, arrayGen } from "../utils";

@@ -25,6 +25,18 @@ export const setHeightValue = (bar, length, width) => {
 	return null;
 };
 
+/*
+	Array size
+	4*1 5*2 6*3 7*4 7*5	
+	8*6 9*7 10*8 11*9 12*10
+	
+	array range
+	(1,2,3) : 10 - 100
+	(3,4,5) : 10 - 200
+	(6,7,8) : 10 - 300
+	(9,10)  : 10 - 400
+*/
+
 export const arrayGen = (size) => {
 	let array = [];
 	let range = (size > 5 ? size + 2 : size + 3) * size;
