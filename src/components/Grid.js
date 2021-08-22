@@ -17,47 +17,54 @@ export default function Grid() {
 		}
 	}, [newArray, size, dispatch]);
 
-	const abc = () => {
+	useEffect(() => {
+		console.log("update");
+	}, [array]);
+	useEffect(() => {
+		window.addEventListener("resize", setWidthHeight);
+		setWidthHeight();
+
+		return () => {
+			window.removeEventListener("resize", setWidthHeight);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (running) {
+			bubbleSort(array, array.length, setArray);
+		}
+	}, [running]);
+
+	const setWidthHeight = () => {
 		const { clientWidth, clientHeight } = gridRef.current;
 		setGridSize({ clientWidth, clientHeight });
 	};
-
-	useEffect(() => {
-		window.addEventListener("resize", abc);
-		abc();
-	}, []);
-
-	const arrayBars = array.map((bar, i, bars) => {
-		return (
-			<div
-				className="bar"
-				key={i}
-				id={`${bar} ${gridSize.clientHeight} ${size}`}
-				style={{
-					height: `${getBarHeight(bar, size, gridSize.clientHeight)}px`,
-					width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
-					borderRadius: "10%",
-					backgroundColor: "#1C62A3",
-					margin: `${getBarMargin(bars.length, gridSize.clientWidth)}px`,
-				}}
-			></div>
-		);
-	});
 
 	return (
 		<div className="Grid">
 			<div ref={gridRef} className="grid_container">
 				<div className="ruler"></div>
-				<div
-					className="arrayBars"
-					style={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						zIndex: "2",
-					}}
-				>
-					{arrayBars}
+				<div className="arrayBars">
+					{array.map((bar, i, bars) => {
+						return (
+							<div
+								className="bar"
+								key={i}
+								id={`${bar} ${gridSize.clientHeight} ${size}`}
+								style={{
+									height: `${getBarHeight(bar, size, gridSize.clientHeight)}px`,
+									width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
+									backgroundColor: "#1C62A3",
+									margin: `${getBarMargin(
+										bars.length,
+										gridSize.clientWidth
+									)}px`,
+								}}
+							>
+								{setHeightValue(bar, bars.length, gridSize.clientWidth)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>
@@ -65,12 +72,33 @@ export default function Grid() {
 }
 
 const getBarHeight = (bar, size, height) =>
-	(bar / (Math.ceil(size / 3) * 100)) * (height * 0.8);
-const getBarWidth = (length, width) => (width * 0.4) / length;
-const getBarMargin = (length, width) => Math.min((width * 0.25) / length, 20);
+	(bar / (Math.ceil(size / 3) * 100)) * (height * 0.7);
+
+const getBarWidth = (length, width) => (width * 0.5) / length;
+
+const getBarMargin = (length, width) => Math.min((width * 0.24) / length, 20);
+
+const setHeightValue = (bar, length, width) => {
+	const barWidth = getBarWidth(length, width);
+	let size = 20;
+	if (barWidth > 25) {
+		if (barWidth < 40) size = 12;
+		else if (barWidth < 80) size = 16;
+		return <p style={{ fontSize: `${size}px` }}>{bar}</p>;
+	}
+	return null;
+};
 
 /*
 	size
+	1 - 4
+	2 - 10
+	3 - 18
+	4 - 28
+	5 - 35
+	6 - 48
+	7 - 63
+
 	4*1 5*2 6*3 7*4 7*5	
 	8*6 9*7 10*8 11*9 12*10
 	
@@ -96,4 +124,21 @@ const arrayGen = (size) => {
 		);
 	}
 	return array;
+};
+
+const bubbleSort = async (array, n, setArray) => {
+	let arr = array;
+	console.log("start", arr, arr[0], arr[1], arr[2], arr[3]);
+
+	var i, j;
+	for (i = 0; i < n - 1; i++)
+		for (j = 0; j < n - i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				let temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+				setArray(arr);
+			}
+		}
+	console.log("finish", arr);
 };

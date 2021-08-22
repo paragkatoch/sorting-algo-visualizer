@@ -123,18 +123,20 @@ function Sliders({ size, speed, handleSliderChange }) {
 
 	return (
 		<>
-			{types.map(({ name, title, value }) => (
-				<section key={name} className={`slider_${name}`}>
-					<p>{title}</p>
-					<Slider
-						{...{
-							value,
-							name,
-							handleSliderChange,
-						}}
-					/>
-				</section>
-			))}
+			{types.map((type) => {
+				const { title, ...rest } = type;
+				return (
+					<section key={rest.name} className={`slider_${rest.name}`}>
+						<p>{title}</p>
+						<Slider
+							{...{
+								...rest,
+								handleSliderChange,
+							}}
+						/>
+					</section>
+				);
+			})}
 		</>
 	);
 }

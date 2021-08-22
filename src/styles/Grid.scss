@@ -24,6 +24,21 @@
 			background-color: #1c62a3;
 		}
 		.arrayBars {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 2;
+
+			.bar {
+				border-radius: 10%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				p {
+					color: #33b1fa;
+				}
+			}
 		}
 	}
 }
