@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 
 import { AppContext } from "../utils";
 import "../styles/AlgoDropDown.scss";
+import DownArrow from "../assets/downArrow.svg";
 
 const algorithms = ["Merge Sort", "Heap Sort", "Quick Sort", "Bubble Sort"];
 let current = "Type of algorithm";
@@ -70,7 +71,7 @@ const AlgoDropDownUI = React.memo((props) => {
 				onClick={props.handleClick}
 			>
 				<p>{props.current}</p>
-				<img src="/sorting-algo-visualizer/downArrow.svg" alt="Down Arrow" />
+				<img src={DownArrow} alt="Down Arrow" />
 			</button>
 
 			{!props.running && (

@@ -5,6 +5,8 @@ import AlgoDropDown from "../components/AlgoDropDown";
 
 import { AppContext, inActiveButtonStyle } from "../utils";
 import "../styles/SideBar.scss";
+import MenuOpen from "../assets/menuOpen.svg";
+import MenuClose from "../assets/menuClose.svg";
 
 export default function SideBar() {
 	const [deadState, setDeadState] = useState({});
@@ -40,7 +42,7 @@ const SideBarUI = React.forwardRef(
 					className="visibility_button"
 					onClick={handleVisibility}
 				>
-					<img src="/sorting-algo-visualizer/menuOpen.svg" alt="0pen" />
+					<img src={MenuOpen} alt="open" />
 				</button>
 
 				<div ref={ref} className="sidebar_container">
@@ -57,7 +59,7 @@ const SideBarUI = React.forwardRef(
 						<Sliders />
 
 						<button className="visibility_button" onClick={handleVisibility}>
-							<img src="/sorting-algo-visualizer/menuClose.svg" alt="olose" />
+							<img src={MenuClose} alt="close" />
 						</button>
 					</section>
 				</div>
