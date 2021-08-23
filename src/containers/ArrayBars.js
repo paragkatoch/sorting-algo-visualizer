@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import {
 	AppContext,
+	getBackgroundColor,
 	getBarHeight,
 	getBarMargin,
 	getBarWidth,
@@ -32,7 +33,7 @@ function ArrayBarsUI({ array, gridSize, size }) {
 						style={{
 							height: `${getBarHeight(bar[0], size, gridSize.clientHeight)}px`,
 							width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
-							backgroundColor: "#1C62A3",
+							backgroundColor: `${getBackgroundColor(bar[1])}`,
 							margin: `${getBarMargin(bars.length, gridSize.clientWidth)}px`,
 						}}
 					>

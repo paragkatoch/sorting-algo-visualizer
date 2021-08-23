@@ -25,6 +25,19 @@ export const setHeightValue = (bar, length, width) => {
 	return null;
 };
 
+export const getBackgroundColor = (state) => {
+	switch (state) {
+		case -1:
+			return "#A31C1C"; // red
+		case 1:
+			return "#1CA321"; // green
+		case 2:
+			return "#1C21A3"; // dark-blue
+		default:
+			return "#1C62A3"; // light-blue
+	}
+};
+
 /*
 	Array size
 	4*1 5*2 6*3 7*4 7*5	
@@ -37,6 +50,7 @@ export const setHeightValue = (bar, length, width) => {
 	(9,10)  : 10 - 400
 
 	array state
+	-1 - wrong
 	0 - unsorted or untracked
 	1 - selected 
 	2 - sorted
