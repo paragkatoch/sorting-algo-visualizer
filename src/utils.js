@@ -35,6 +35,15 @@ export const setHeightValue = (bar, length, width) => {
 	(3,4,5) : 10 - 200
 	(6,7,8) : 10 - 300
 	(9,10)  : 10 - 400
+
+	array state
+	0 - unsorted or untracked
+	1 - selected 
+	2 - sorted
+
+
+	resulted array
+	[[value,0],[value,0],[value,0],[value,0],[value,0]]
 */
 
 export const arrayGen = (size) => {
@@ -42,9 +51,10 @@ export const arrayGen = (size) => {
 	let range = (size > 5 ? size + 2 : size + 3) * size;
 
 	for (let i = 1; i <= range; i++) {
-		array.push(
-			Math.floor(10 + Math.random() * (Math.ceil(size / 3) * 100 - 10))
-		);
+		array.push([
+			Math.floor(10 + Math.random() * (Math.ceil(size / 3) * 100 - 10)),
+			0,
+		]);
 	}
 	return array;
 };

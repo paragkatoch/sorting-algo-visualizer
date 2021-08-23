@@ -76,11 +76,11 @@ export default function BubbleSort(props) {
 		else if (running && i >= 0)
 			if (j >= length - i - 1) setI((prev) => prev + 1);
 			else {
-				if (array[j] > array[j + 1]) {
+				if (array[j][0] > array[j + 1][0]) {
 					let arr = array;
-					let temp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = temp;
+					let temp = arr[j][0];
+					arr[j][0] = arr[j + 1][0];
+					arr[j + 1][0] = temp;
 
 					dispatch({ type: "array", data: arr });
 				}
@@ -89,7 +89,6 @@ export default function BubbleSort(props) {
 				}, sortingSpeed);
 			}
 	}, [j]);
-	console.log(props);
 
 	return <props.childComponent {...props.childProps} />;
 }

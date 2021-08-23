@@ -28,15 +28,15 @@ function ArrayBarsUI({ array, gridSize, size }) {
 					<div
 						className="bar"
 						key={i}
-						id={`${bar} ${gridSize.clientHeight} ${size}`}
+						id={`${bar[0]} ${gridSize.clientHeight} ${size}`}
 						style={{
-							height: `${getBarHeight(bar, size, gridSize.clientHeight)}px`,
+							height: `${getBarHeight(bar[0], size, gridSize.clientHeight)}px`,
 							width: `${getBarWidth(bars.length, gridSize.clientWidth)}px`,
 							backgroundColor: "#1C62A3",
 							margin: `${getBarMargin(bars.length, gridSize.clientWidth)}px`,
 						}}
 					>
-						{setHeightValue(bar, bars.length, gridSize.clientWidth)}
+						{setHeightValue(bar[0], bars.length, gridSize.clientWidth)}
 					</div>
 				);
 			})}
