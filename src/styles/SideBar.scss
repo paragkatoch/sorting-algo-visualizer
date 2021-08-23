@@ -63,11 +63,12 @@
 }
 
 @media screen and (max-width: 910px) {
-	.SideBar {
+	.Sidebar {
 		position: absolute;
 		right: 0;
 		height: inherit;
 		z-index: 2;
+		overflow: hidden;
 
 		#show {
 			display: flex;
