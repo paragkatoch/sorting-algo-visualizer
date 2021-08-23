@@ -31,6 +31,10 @@ export default function Grid() {
 		setGridSize({ clientWidth, clientHeight });
 	};
 
+	return <GridUI {...{ gridSize, ref: gridRef }} />;
+}
+
+const GridUI = React.forwardRef(({ gridSize }, gridRef) => {
 	return (
 		<div className="Grid">
 			<div ref={gridRef} className="grid_container">
@@ -41,4 +45,4 @@ export default function Grid() {
 			</div>
 		</div>
 	);
-}
+});

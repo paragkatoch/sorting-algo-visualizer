@@ -49,7 +49,7 @@ export default function AlgoDropDown({ deadState }) {
 	);
 }
 
-const AlgoDropDownUI = (props) => {
+const AlgoDropDownUI = React.memo((props) => {
 	const options = algorithms.map((algo, i) => (
 		<li key={i}>
 			<button id={algo} onClick={props.handleChange}>
@@ -84,4 +84,4 @@ const AlgoDropDownUI = (props) => {
 			)}
 		</section>
 	);
-};
+});

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import Slider from "../components/Slider";
 
@@ -16,7 +16,10 @@ export default function Sliders() {
 			max: -1,
 		},
 	];
+	return <SlidersUI {...{ types }} />;
+}
 
+const SlidersUI = React.memo(({ types }) => {
 	return (
 		<>
 			{types.map((type) => {
@@ -30,4 +33,4 @@ export default function Sliders() {
 			})}
 		</>
 	);
-}
+});

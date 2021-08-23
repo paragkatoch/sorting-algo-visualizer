@@ -18,13 +18,18 @@ export default function Header() {
 	}, [algoType]);
 
 	useEffect(() => {
-		ref.current.innerText = running ? "stop" : "start";
+		if (ref.current) ref.current.innerText = running ? "stop" : "start";
 	}, [running]);
 
 	const handleChange = () => {
+		console.log(ref);
 		dispatch({ type: ref.current.innerText });
 	};
 
+	return <HeaderUI {...{ buttonStyle, handleChange, ref }} />;
+}
+
+const HeaderUI = React.forwardRef(({ buttonStyle, handleChange }, ref) => {
 	return (
 		<header className="MainHeader">
 			<div className="app_name">
@@ -44,4 +49,4 @@ export default function Header() {
 			</div>
 		</header>
 	);
-}
+});

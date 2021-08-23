@@ -28,34 +28,40 @@ export default function SideBar() {
 		ref.current.classList.toggle("sidebar_container_action");
 	};
 
-	return (
-		<section className="Sidebar">
-			<button
-				id="show"
-				className="visibility_button"
-				onClick={handleVisibility}
-			>
-				<img src="/menuOpen.svg" alt="" />
-			</button>
-
-			<div ref={ref} className="sidebar_container">
-				<section className="sidebar_main">
-					<button
-						style={deadState}
-						className="newArray button-style button-action"
-						onClick={handleClick}
-					>
-						<p>New Array</p>
-					</button>
-
-					<AlgoDropDown deadState={deadState} />
-					<Sliders />
-
-					<button className="visibility_button" onClick={handleVisibility}>
-						<img src="/menuClose.svg" alt="" />
-					</button>
-				</section>
-			</div>
-		</section>
-	);
+	return <SideBarUI {...{ handleClick, handleVisibility, ref, deadState }} />;
 }
+
+const SideBarUI = React.forwardRef(
+	({ handleClick, handleVisibility, deadState }, ref) => {
+		return (
+			<section className="Sidebar">
+				<button
+					id="show"
+					className="visibility_button"
+					onClick={handleVisibility}
+				>
+					<img src="/menuOpen.svg" alt="" />
+				</button>
+
+				<div ref={ref} className="sidebar_container">
+					<section className="sidebar_main">
+						<button
+							style={deadState}
+							className="newArray button-style button-action"
+							onClick={handleClick}
+						>
+							<p>New Array</p>
+						</button>
+
+						<AlgoDropDown deadState={deadState} />
+						<Sliders />
+
+						<button className="visibility_button" onClick={handleVisibility}>
+							<img src="/menuClose.svg" alt="" />
+						</button>
+					</section>
+				</div>
+			</section>
+		);
+	}
+);
