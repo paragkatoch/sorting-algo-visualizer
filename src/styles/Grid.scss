@@ -46,6 +46,9 @@
 @media screen and (max-width: 1200px) {
 	.Grid {
 		width: calc(100vw - 246px);
+		.grid_container {
+			width: 100%;
+		}
 	}
 }
 @media screen and (max-width: 910px) {
