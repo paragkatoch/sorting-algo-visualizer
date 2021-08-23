@@ -8,8 +8,10 @@ export default function BubbleSort(props) {
 	const [paused, setPaused] = useState();
 	const [cords, setCords] = useState();
 
-	const { array, running, size, newArray, algoType, dispatch } =
+	const { array, running, size, speed, newArray, algoType, dispatch } =
 		useContext(AppContext);
+	const sortingSpeed = 30 * speed;
+	console.log(speed, sortingSpeed);
 
 	const length = array.length;
 
@@ -60,11 +62,11 @@ export default function BubbleSort(props) {
 				setTimeout(() => {
 					setJ(-100);
 					setPaused(false);
-				}, 200);
+				}, sortingSpeed);
 			} else {
 				setTimeout(() => {
 					setJ(0);
-				}, 200);
+				}, sortingSpeed);
 			}
 		}
 	}, [i]);
@@ -85,7 +87,7 @@ export default function BubbleSort(props) {
 				}
 				setTimeout(() => {
 					setJ((prev) => prev + 1);
-				}, 200);
+				}, sortingSpeed);
 			}
 	}, [j]);
 	console.log(props);

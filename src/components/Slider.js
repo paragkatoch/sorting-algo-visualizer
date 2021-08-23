@@ -6,7 +6,7 @@ const Slider = React.memo(({ name, value, min = 1, max = 10 }) => {
 
 	const onInput = (e) => {
 		const { className, value } = e.target;
-		const data = Number(value);
+		const data = Math.abs(Number(value));
 		dispatch({ type: className, data });
 	};
 

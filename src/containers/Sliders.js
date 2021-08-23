@@ -8,7 +8,13 @@ export default function Sliders() {
 	const { size, speed } = useContext(AppContext);
 	const types = [
 		{ name: "size", title: "Array size", value: size },
-		{ name: "speed", title: "Sorting speed", value: speed },
+		{
+			name: "speed",
+			title: "Sorting speed",
+			value: -1 * speed,
+			min: -10,
+			max: -1,
+		},
 	];
 
 	return (

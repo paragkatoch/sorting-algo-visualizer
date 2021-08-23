@@ -11,8 +11,8 @@ export default function App() {
 	// states
 	const [newArray, setNewArray] = useState(true);
 	const [algoType, setAlgoType] = useState("");
-	const [size, setSize] = useState(2);
-	const [speed, setSpeed] = useState(4);
+	const [size, setSize] = useState(2); // 1-10
+	const [speed, setSpeed] = useState(8); // 10 -1
 	const [running, setRunning] = useState(false);
 	const [array, setArray] = useState([]);
 
