@@ -70,7 +70,7 @@ const AlgoDropDownUI = React.memo((props) => {
 				onClick={props.handleClick}
 			>
 				<p>{props.current}</p>
-				<img src="/downArrow.svg" alt="Down Arrow" />
+				<img src="/sorting-algo-visualizer/downArrow.svg" alt="Down Arrow" />
 			</button>
 
 			{!props.running && (

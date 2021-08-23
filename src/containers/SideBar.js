@@ -40,7 +40,7 @@ const SideBarUI = React.forwardRef(
 					className="visibility_button"
 					onClick={handleVisibility}
 				>
-					<img src="/menuOpen.svg" alt="" />
+					<img src="/sorting-algo-visualizer/menuOpen.svg" alt="0pen" />
 				</button>
 
 				<div ref={ref} className="sidebar_container">
@@ -57,7 +57,7 @@ const SideBarUI = React.forwardRef(
 						<Sliders />
 
 						<button className="visibility_button" onClick={handleVisibility}>
-							<img src="/menuClose.svg" alt="" />
+							<img src="/sorting-algo-visualizer/menuClose.svg" alt="olose" />
 						</button>
 					</section>
 				</div>
