@@ -49,8 +49,7 @@ export default function BubbleSort(props) {
 	useEffect(() => {
 		// set i to saved value on restart
 		if (i === -100) setI(cords.i);
-
-		if (running) {
+		else if (running) {
 			// on complete
 			if (i >= length - 1) {
 				dispatch({ type: "stop" });
