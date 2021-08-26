@@ -31,7 +31,7 @@ export default function App() {
 				}
 				break;
 			case "speed":
-				if (!running) setSpeed(data);
+				setSpeed(data);
 				break;
 			case "start":
 				if (algoType !== "") setRunning(true);
