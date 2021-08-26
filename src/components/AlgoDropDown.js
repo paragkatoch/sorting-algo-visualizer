@@ -38,51 +38,48 @@ export default function AlgoDropDown({ deadState }) {
 	return (
 		<AlgoDropDownUI
 			{...{
-				containerRef,
+				ref: { containerRef, optionRef },
 				deadState,
 				handleClick,
 				current,
 				running,
-				optionRef,
 				handleChange,
 			}}
 		/>
 	);
 }
 
-const AlgoDropDownUI = React.memo((props) => {
-	const options = algorithms.map((algo, i) => (
-		<li key={i}>
-			<button id={algo} onClick={props.handleChange}>
-				{algo}
-			</button>
-			{i < algorithms.length - 1 && <hr />}
-		</li>
-	));
+const AlgoDropDownUI = React.forwardRef(
+	(props, { containerRef, optionRef }) => {
+		const options = algorithms.map((algo, i) => (
+			<li key={i}>
+				<button id={algo} onClick={props.handleChange}>
+					{algo}
+				</button>
+				{i < algorithms.length - 1 && <hr />}
+			</li>
+		));
 
-	return (
-		<section
-			ref={props.containerRef}
-			className="algoDropDown_container algoDropDown_interaction"
-		>
-			<button
-				style={props.deadState}
-				className="algoDropDown_button button-style button-action"
-				onClick={props.handleClick}
+		return (
+			<section
+				ref={containerRef}
+				className="algoDropDown_container algoDropDown_interaction"
 			>
-				<p>{props.current}</p>
-				<img src={DownArrow} alt="Down Arrow" />
-			</button>
-
-			{!props.running && (
-				<div
-					className="algoDropDown_options"
-					id="options"
-					ref={props.optionRef}
+				<button
+					style={props.deadState}
+					className="algoDropDown_button button-style button-action"
+					onClick={props.handleClick}
 				>
-					<ul className="options">{options}</ul>
-				</div>
-			)}
-		</section>
-	);
-});
+					<p>{props.current}</p>
+					<img src={DownArrow} alt="Down Arrow" />
+				</button>
+
+				{!props.running && (
+					<div className="algoDropDown_options" id="options" ref={optionRef}>
+						<ul className="options">{options}</ul>
+					</div>
+				)}
+			</section>
+		);
+	}
+);

@@ -22,7 +22,6 @@ export default function Header() {
 	}, [running]);
 
 	const handleChange = () => {
-		console.log(ref);
 		dispatch({ type: ref.current.innerText });
 	};
 
