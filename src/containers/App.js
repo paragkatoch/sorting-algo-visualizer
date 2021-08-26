@@ -40,7 +40,7 @@ export default function App() {
 				if (algoType !== "") setRunning(false);
 				break;
 			case "array":
-				if (!running) setArray(data);
+				if (running || newArray) setArray(data);
 				break;
 			default:
 				console.log("What are you doing?");

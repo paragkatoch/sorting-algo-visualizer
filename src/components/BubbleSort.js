@@ -3,18 +3,100 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils";
 
 export default function BubbleSort(props) {
-	const [i, setI] = useState();
-	const [j, setJ] = useState();
-	const [paused, setPaused] = useState();
-	const [cords, setCords] = useState();
+	const [I, setI] = useState(-1);
+	const [J, setJ] = useState(-1);
+	const [paused, setPaused] = useState(false);
+	const [cords, setCords] = useState({ I: -1, J: -1 });
 	const [, setUpdate] = useState(true);
 
-	const { array, running, size, speed, newArray, algoType, dispatch } =
-		useContext(AppContext);
-	const sortingSpeed = (8 * (speed * speed)) / 2;
-	console.log(speed, sortingSpeed);
-
+	const { array, running, speed, dispatch } = useContext(AppContext);
 	const length = array.length;
+
+	/**
+	 * 		Logic
+	 */
+
+	// reset values if size, array or algorithm are changed
+	useEffect(() => {
+		if (paused) reset();
+	}, [array]);
+
+	// Controls running state
+	useEffect(() => {
+		if (paused && running) setI(-100);
+		else if (running)
+			if (I === -1) setI(0);
+			else setI((prev) => prev);
+		else if (I > -1) {
+			setPaused(true);
+			const j = J > -1 ? J : 0;
+			setCords({ I, J: j });
+		}
+	}, [running]);
+
+	// outer for loop
+	useEffect(() => {
+		if (I === -100) setI(cords.I);
+		else if (running) {
+			if (I >= length - 1) {
+				dispatch({ type: "stop" });
+				setI(-1);
+				setJ(-1);
+			} else if (paused) {
+				timeOut(() => {
+					setJ(-100);
+					setPaused(false);
+				});
+			} else {
+				timeOut(() => {
+					setJ(0);
+				});
+			}
+		}
+	}, [I]);
+
+	// inner for loop
+	useEffect(() => {
+		if (J === -100) setJ(cords.J);
+		else if (running && I >= 0)
+			if (J >= length - I - 1) {
+				if (J === 1) setArrayState(J - 1, 2, true, false);
+				else setArrayState(J, 2, false, false);
+
+				setI((prev) => prev + 1);
+			} else {
+				setArrayState(J, 1);
+
+				timeOut(() => {
+					if (array[J][0] > array[J + 1][0]) {
+						setArrayState(J, -1);
+
+						timeOut(() => {
+							swapAndSetArray(J);
+
+							timeOut(() => {
+								setArrayState(J, 1);
+
+								timeOut(() => {
+									setArrayState(J, 0, false, false);
+									setJ((prev) => prev + 1);
+								});
+							});
+						});
+					} else {
+						setArrayState(J, 0, false, false);
+
+						timeOut(() => {
+							setJ((prev) => prev + 1);
+						});
+					}
+				});
+			}
+	}, [J]);
+
+	/**
+	 * 		Helper functions
+	 */
 
 	/**
 	 * set's default values
@@ -23,7 +105,7 @@ export default function BubbleSort(props) {
 		setI(-1);
 		setJ(-1);
 		setPaused(false);
-		setCords({ i: -1, j: -1 });
+		setCords({ I: -1, J: -1 });
 	}
 
 	/**
@@ -78,90 +160,17 @@ export default function BubbleSort(props) {
 	}
 
 	/**
-	 * 		Logic
+	 * run a function after specific time interval
+	 * @param {function} func function to run
+	 * @param {number} time timeInterval
 	 */
-
-	// set values on mount
-	useEffect(reset, []);
-
-	// reset values if size, array or algorithm are changed
-	useEffect(() => {
-		if (paused) reset();
-	}, [size, newArray, algoType]);
-
-	// Controls running state
-	useEffect(() => {
-		if (paused && running) setI(-100);
-		else if (running)
-			if (i === -1) setI(0);
-			else setI((prev) => prev);
-		else if (i > -1) {
-			setPaused(true);
-			setCords({ i, j });
-		}
-	}, [running]);
-
-	// outer for loop
-	useEffect(() => {
-		if (i === -100) setI(cords.i);
-		else if (running) {
-			if (i >= length - 1) {
-				dispatch({ type: "stop" });
-				setI(-1);
-				setJ(-1);
-			} else if (paused) {
-				setTimeout(() => {
-					setJ(-100);
-					setPaused(false);
-				}, sortingSpeed);
-			} else {
-				setTimeout(() => {
-					setJ(0);
-				}, sortingSpeed);
+	function timeOut(func, time = 4 * speed ** 2) {
+		setTimeout(() => {
+			if (running) {
+				func();
 			}
-		}
-	}, [i]);
-
-	// inner for loop
-	useEffect(() => {
-		if (j === -100) setJ(cords.j);
-		else if (running && i >= 0)
-			if (j >= length - i - 1) {
-				if (j === 1) setArrayState(j - 1, 2, true, false);
-				else setArrayState(j, 2, false, false);
-
-				setI((prev) => prev + 1);
-			} else {
-				setArrayState(j, 1);
-
-				setTimeout(() => {
-					if (array[j][0] > array[j + 1][0]) {
-						setArrayState(j, -1);
-
-						setTimeout(() => {
-							swapAndSetArray(j);
-
-							setTimeout(() => {
-								setArrayState(j, 1);
-
-								setTimeout(() => {
-									setArrayState(j, 0, false, false);
-									setJ((prev) => prev + 1);
-								}, sortingSpeed);
-							}, sortingSpeed);
-						}, sortingSpeed);
-					} else {
-						setTimeout(() => {
-							setArrayState(j, 0, false, false);
-
-							setTimeout(() => {
-								setJ((prev) => prev + 1);
-							}, sortingSpeed);
-						}, sortingSpeed);
-					}
-				}, sortingSpeed);
-			}
-	}, [j]);
+		}, time);
+	}
 
 	return <props.childComponent {...props.childProps} />;
 }
