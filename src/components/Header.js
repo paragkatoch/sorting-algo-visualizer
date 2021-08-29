@@ -7,10 +7,10 @@ export default function Header() {
 	const [buttonStyle, setStyle] = useState(inActiveButtonStyle);
 	const { algoType, running, dispatch } = useContext(AppContext);
 	const ref = useRef();
+	const [wait, setWait] = useState(false);
+	const length = Object.keys(buttonStyle).length;
 
 	useEffect(() => {
-		const length = Object.keys(buttonStyle).length;
-
 		if (!algoType && !length) setStyle(inActiveButtonStyle);
 		else if (algoType && length) setStyle({});
 
@@ -18,11 +18,28 @@ export default function Header() {
 	}, [algoType]);
 
 	useEffect(() => {
+		if (wait && !length) {
+			setStyle(inActiveButtonStyle);
+		} else if (!wait && length && algoType) {
+			setStyle({});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [wait]);
+
+	useEffect(() => {
 		if (ref.current) ref.current.innerText = running ? "stop" : "start";
 	}, [running]);
 
 	const handleChange = () => {
-		dispatch({ type: ref.current.innerText });
+		if (!wait) {
+			if (ref.current.innerText === "stop") {
+				setWait(true);
+				setTimeout(() => {
+					setWait(false);
+				}, [500]);
+			}
+			dispatch({ type: ref.current.innerText });
+		}
 	};
 
 	return <HeaderUI {...{ buttonStyle, handleChange, ref }} />;
