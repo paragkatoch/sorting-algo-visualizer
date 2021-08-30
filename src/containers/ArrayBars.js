@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+
+import Sort from "./Sort";
 import {
 	AppContext,
 	getBackgroundColor,
@@ -7,9 +9,7 @@ import {
 	getBarWidth,
 	setHeightValue,
 } from "../utils";
-import Sort from "./Sort";
 
-// FIXME - passing ArrayBarUI as children doesn't updates the UI
 export default function ArrayBars({ gridSize }) {
 	const { array, size } = useContext(AppContext);
 
