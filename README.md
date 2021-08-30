@@ -9,7 +9,8 @@ A _Web App_ for visualizing how sorting algorithms works under the hood using Re
 
 ![](https://raw.githubusercontent.com/preIdiot/sorting-algo-visualizer/assets/assets/demo.gif)
 
------
+---
+
 ## Algorithms
 
 - [x] Bubble Sort - [here](https://github.com/preIdiot/sorting-algo-visualizer/blob/master/src/components/BubbleSort.js)
@@ -18,6 +19,13 @@ A _Web App_ for visualizing how sorting algorithms works under the hood using Re
 - [x] Merge Sort - [here](https://github.com/preIdiot/sorting-algo-visualizer/blob/master/src/components/MergeSort.js)
 - [x] Quick Sort - [here](https://github.com/preIdiot/sorting-algo-visualizer/blob/master/src/components/QuickSort.js)
 
------
+---
+
+## Features
+
+- [x] Start/stop
+- [x] Responsive
+- [x] Array size +/-
+- [x] Algorithm speed +/-
 
 #### **Have any problem or suggestion?** Head straight to [Issues](https://github.com/preIdiot/sorting-algo-visualizer/issues) and contribute to this project.
