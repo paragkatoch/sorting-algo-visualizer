@@ -2,11 +2,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils";
 
-export default function SelectionSort(props) {
-	const [I, setI] = useState(-1);
-	const [J, setJ] = useState(-1);
+export default function InsertionSort(props) {
+	const [I, setI] = useState(-2);
+	const [J, setJ] = useState(-2);
+
+	const [key, setKey] = useState(null);
 	const [paused, setPaused] = useState(false);
-	const [cords, setCords] = useState({ I: -1, J: -1 });
+	const [cords, setCords] = useState({ I: -2, J: -2 });
 	const [started, setStarted] = useState(false);
 	const [, setUpdate] = useState(true);
 
@@ -14,72 +16,63 @@ export default function SelectionSort(props) {
 	const length = array.length;
 
 	useEffect(() => {
-		if (!running && started) reset();
+		if (!running) {
+			reset();
+		}
 	}, [array]);
 
 	useEffect(() => {
 		if (running && !paused) {
 			setStarted(true);
-			setI(0);
+			setI(1);
 		} else if (!running && started) {
-			setPaused(true);
 			setCords({ I, J });
+			setPaused(true);
 		} else if (running && paused) {
 			setI(-10);
 		}
 	}, [running]);
 
-	// outer for loop
 	useEffect(() => {
-		if (running && I !== -1) {
-			if (I === -10) setI(cords.I);
-			else if (I < length - 1) {
+		if (running && I !== -2) {
+			if (I === -10) {
+				setI(cords.I);
+			} else if (I < length) {
 				timeOut(() => {
-					setArrayState([I], 1, false);
-
-					paused ? setJ(-10) : setJ(I + 1);
+					if (!paused) {
+						setKey(array[I]);
+						setArrayState([I], 1);
+						setJ(I - 1);
+					} else {
+						cords.J !== J && setCords({ I, J });
+						setJ(-10);
+					}
 				});
 			} else {
-				setArrayState([I], 2);
+				setArrayStateRange(0, length);
 				dispatch({ type: "stop" });
 				reset();
 			}
 		}
 	}, [I]);
 
-	// inner for loop
 	useEffect(() => {
-		if (running && J !== -1) {
-			if (J === -10) {
-				setPaused(false);
-				setJ(cords.J);
-			} else if (J < length) {
-				timeOut(() => {
-					setArrayState([J], 1);
+		if (running && J !== -2) {
+			timeOut(() => {
+				if (J === -10) {
+					setPaused(false);
+					setJ(cords.J);
+				} else if (J >= 0 && array[J][0] > key[0]) {
+					setArrayState([J + 1], -1);
 					timeOut(() => {
-						if (array[J][0] < array[I][0]) {
-							setArrayState([I, J], -1);
-							timeOut(() => {
-								dispatch({ type: "array", data: swap(I, J) });
-								setArrayState([I], 1);
-								setArrayState([J], 0);
-
-								timeOut(() => {
-									setJ((prev) => prev + 1);
-								});
-							});
-						} else {
-							setArrayState([J], 0);
-							setJ((prev) => prev + 1);
-						}
+						pushBackAndSet(J);
+						setJ((prev) => prev - 1);
 					});
-				});
-			} else {
-				timeOut(() => {
-					setArrayState([I], 2);
+				} else {
 					setI((prev) => prev + 1);
-				});
-			}
+					setArrayState([J + 1], 0);
+				}
+			});
 		}
 	}, [J]);
 
@@ -91,26 +84,12 @@ export default function SelectionSort(props) {
 	 * set's default values
 	 */
 	function reset() {
-		setI(-1);
-		setJ(-1);
-		setCords({ I: -1, J: -1 });
+		setI(-2);
+		setJ(-2);
+		setKey(null);
+		setCords({ I: -2, J: -2 });
 		setPaused(false);
 		setStarted(false);
-	}
-
-	/**
-	 * swap array values
-	 * @param {number} index1 First index
-	 * @param {number} index2 Second index
-	 * @returns {array} updated array
-	 */
-	function swap(index1, index2) {
-		let arr = array;
-		let temp = arr[index1][0];
-		arr[index1][0] = arr[index2][0];
-		arr[index2][0] = temp;
-
-		return arr;
 	}
 
 	/**
@@ -127,8 +106,19 @@ export default function SelectionSort(props) {
 	}
 
 	/**
+	 * switches element with key
+	 * @param {number} j index of higher element
+	 * @param {boolean} update re-render
+	 */
+	function pushBackAndSet(j, update = true) {
+		let arr = array;
+		arr[j + 1] = arr[j];
+		arr[j] = key;
+		setArray(arr, update);
+	}
+
+	/**
 	 *	set's the array state
-	 *
 	 * @param {number} from starting Index
 	 * @param {boolean} to ending Index
 	 * @param {number} state state value to set on the index
@@ -144,8 +134,20 @@ export default function SelectionSort(props) {
 	}
 
 	/**
+	 * set's the array state within range
+	 * @param {number} start start index
+	 * @param {number} end end index
+	 */
+	function setArrayStateRange(start, end) {
+		let arr = array;
+		for (let i = start; i < end; i++) {
+			arr[i][1] = 2;
+		}
+		setArray(arr, false);
+	}
+
+	/**
 	 *	dispatches and re-render the component
-	 *
 	 * @param {array} array global state array
 	 * @param {boolean} update should component re-render
 	 */

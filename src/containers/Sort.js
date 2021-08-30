@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import BubbleSort from "../components/BubbleSort";
 import HeapSort from "../components/HeapSort";
+import InsertionSort from "../components/InsertionSort";
 import MergeSort from "../components/MergeSort";
 import QuickSort from "../components/QuickSort";
 import SelectionSort from "../components/SelectionSort";
@@ -30,6 +31,8 @@ export default function Sort(props) {
 			return <BubbleSort {...props} />;
 		case "Selection":
 			return <SelectionSort {...props} />;
+		case "Insertion":
+			return <InsertionSort {...props} />;
 		default:
 			return <props.childComponent {...props.childProps} />;
 	}
