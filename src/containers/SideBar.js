@@ -10,6 +10,7 @@ import MenuClose from "../assets/menuClose.svg";
 
 export default function SideBar() {
 	const [deadState, setDeadState] = useState({});
+	const [buttonImg, setButtonImg] = useState(MenuOpen);
 	const { running, dispatch } = useContext(AppContext);
 	const ref = useRef();
 
@@ -28,21 +29,23 @@ export default function SideBar() {
 
 	const handleVisibility = () => {
 		ref.current.classList.toggle("sidebar_container_action");
+		if (ref.current.classList.length === 2) setButtonImg(MenuClose);
+		else setButtonImg(MenuOpen);
 	};
 
-	return <SideBarUI {...{ handleClick, handleVisibility, ref, deadState }} />;
+	return (
+		<SideBarUI
+			{...{ handleClick, handleVisibility, ref, deadState, buttonImg }}
+		/>
+	);
 }
 
 const SideBarUI = React.forwardRef(
-	({ handleClick, handleVisibility, deadState }, ref) => {
+	({ handleClick, handleVisibility, deadState, buttonImg }, ref) => {
 		return (
 			<section className="Sidebar">
-				<button
-					id="show"
-					className="visibility_button"
-					onClick={handleVisibility}
-				>
-					<img src={MenuOpen} alt="open" />
+				<button className="visibility_button" onClick={handleVisibility}>
+					<img src={buttonImg} alt="open" />
 				</button>
 
 				<div ref={ref} className="sidebar_container">
@@ -57,10 +60,6 @@ const SideBarUI = React.forwardRef(
 
 						<AlgoDropDown deadState={deadState} />
 						<Sliders />
-
-						<button className="visibility_button" onClick={handleVisibility}>
-							<img src={MenuClose} alt="close" />
-						</button>
 					</section>
 				</div>
 			</section>

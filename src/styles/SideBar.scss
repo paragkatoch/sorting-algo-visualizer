@@ -70,9 +70,9 @@
 		z-index: 2;
 		overflow: hidden;
 
-		#show {
+		.visibility_button {
 			display: flex;
-			z-index: 2;
+			z-index: 3;
 
 			position: fixed;
 			right: 10vw;
@@ -85,16 +85,11 @@
 
 		.sidebar_container {
 			opacity: 0;
-			z-index: 3;
+			z-index: 2;
 			background-color: rgba(23, 30, 96, 0.8);
 			transform: translateX(246px);
 
 			transition: all 0.3s;
-			.visibility_button {
-				display: flex;
-				position: absolute;
-				bottom: 5vh;
-			}
 		}
 		.sidebar_container_action {
 			opacity: 1;
