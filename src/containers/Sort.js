@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import BubbleSort from "../components/BubbleSort";
-import HeapSort from "../components/HeapSort";
 import InsertionSort from "../components/InsertionSort";
 import MergeSort from "../components/MergeSort";
 import QuickSort from "../components/QuickSort";
@@ -23,8 +22,6 @@ export default function Sort(props) {
 	switch (sorterType) {
 		case "Merge":
 			return <MergeSort {...props} />;
-		case "Heap":
-			return <HeapSort {...props} />;
 		case "Quick":
 			return <QuickSort {...props} />;
 		case "Bubble":

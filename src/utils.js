@@ -74,10 +74,13 @@ export const arrayGen = (size) => {
 };
 
 export const Algorithm = {
+	Bubble: {
+		pause: true,
+	},
 	Selection: {
 		pause: true,
 	},
-	Bubble: {
+	Insertion: {
 		pause: true,
 	},
 	Merge: {
@@ -85,11 +88,5 @@ export const Algorithm = {
 	},
 	Quick: {
 		pause: false,
-	},
-	Insertion: {
-		pause: true,
-	},
-	Heap: {
-		pause: true,
 	},
 };
