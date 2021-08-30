@@ -4,6 +4,7 @@ import BubbleSort from "../components/BubbleSort";
 import HeapSort from "../components/HeapSort";
 import MergeSort from "../components/MergeSort";
 import QuickSort from "../components/QuickSort";
+import SelectionSort from "../components/SelectionSort";
 
 import { AppContext } from "../utils";
 
@@ -19,14 +20,16 @@ export default function Sort(props) {
 	}, [algoType]);
 
 	switch (sorterType) {
-		case "Merge Sort":
+		case "Merge":
 			return <MergeSort {...props} />;
-		case "Heap Sort":
+		case "Heap":
 			return <HeapSort {...props} />;
-		case "Quick Sort":
+		case "Quick":
 			return <QuickSort {...props} />;
-		case "Bubble Sort":
+		case "Bubble":
 			return <BubbleSort {...props} />;
+		case "Selection":
+			return <SelectionSort {...props} />;
 		default:
 			return <props.childComponent {...props.childProps} />;
 	}
