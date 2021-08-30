@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/sorting-algo-visualizer/static/css/main.d7e273ff.chunk.css",
-    "main.js": "/sorting-algo-visualizer/static/js/main.16f34927.chunk.js",
-    "main.js.map": "/sorting-algo-visualizer/static/js/main.16f34927.chunk.js.map",
+    "main.js": "/sorting-algo-visualizer/static/js/main.2e435310.chunk.js",
+    "main.js.map": "/sorting-algo-visualizer/static/js/main.2e435310.chunk.js.map",
     "runtime-main.js": "/sorting-algo-visualizer/static/js/runtime-main.8159a29c.js",
     "runtime-main.js.map": "/sorting-algo-visualizer/static/js/runtime-main.8159a29c.js.map",
-    "static/js/2.6a429176.chunk.js": "/sorting-algo-visualizer/static/js/2.6a429176.chunk.js",
-    "static/js/2.6a429176.chunk.js.map": "/sorting-algo-visualizer/static/js/2.6a429176.chunk.js.map",
+    "static/js/2.f4a9fa86.chunk.js": "/sorting-algo-visualizer/static/js/2.f4a9fa86.chunk.js",
+    "static/js/2.f4a9fa86.chunk.js.map": "/sorting-algo-visualizer/static/js/2.f4a9fa86.chunk.js.map",
     "index.html": "/sorting-algo-visualizer/index.html",
     "static/css/main.d7e273ff.chunk.css.map": "/sorting-algo-visualizer/static/css/main.d7e273ff.chunk.css.map",
-    "static/js/2.6a429176.chunk.js.LICENSE.txt": "/sorting-algo-visualizer/static/js/2.6a429176.chunk.js.LICENSE.txt",
+    "static/js/2.f4a9fa86.chunk.js.LICENSE.txt": "/sorting-algo-visualizer/static/js/2.f4a9fa86.chunk.js.LICENSE.txt",
     "static/media/downArrow.cf7bd89e.svg": "/sorting-algo-visualizer/static/media/downArrow.cf7bd89e.svg",
     "static/media/menuClose.cba5efdd.svg": "/sorting-algo-visualizer/static/media/menuClose.cba5efdd.svg",
     "static/media/menuOpen.db3319ac.svg": "/sorting-algo-visualizer/static/media/menuOpen.db3319ac.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8159a29c.js",
-    "static/js/2.6a429176.chunk.js",
+    "static/js/2.f4a9fa86.chunk.js",
     "static/css/main.d7e273ff.chunk.css",
-    "static/js/main.16f34927.chunk.js"
+    "static/js/main.2e435310.chunk.js"
   ]
 }
