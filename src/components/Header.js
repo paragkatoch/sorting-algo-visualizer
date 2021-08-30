@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import { AppContext, inActiveButtonStyle } from "../utils";
+import { AppContext, inActiveButtonStyle, Algorithm } from "../utils";
 import "../styles/Header.scss";
 
 export default function Header() {
@@ -39,7 +39,7 @@ export default function Header() {
 				}, [500]);
 			}
 
-			if (ref.current.innerText === "stop" && Algorithms[algoType].pause)
+			if (ref.current.innerText === "stop" && Algorithm[algoType].pause)
 				dispatch({ type: ref.current.innerText });
 			else if (ref.current.innerText === "start")
 				dispatch({ type: ref.current.innerText });
@@ -70,18 +70,3 @@ const HeaderUI = React.forwardRef(({ buttonStyle, handleChange }, ref) => {
 		</header>
 	);
 });
-
-const Algorithms = {
-	"Merge Sort": {
-		pause: true,
-	},
-	"Bubble Sort": {
-		pause: true,
-	},
-	"Quick Sort": {
-		pause: false,
-	},
-	"Heap Sort": {
-		pause: false,
-	},
-};

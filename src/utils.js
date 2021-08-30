@@ -72,3 +72,24 @@ export const arrayGen = (size) => {
 	}
 	return array;
 };
+
+export const Algorithm = {
+	Selection: {
+		pause: true,
+	},
+	Bubble: {
+		pause: true,
+	},
+	Merge: {
+		pause: true,
+	},
+	Quick: {
+		pause: false,
+	},
+	Insertion: {
+		pause: true,
+	},
+	Heap: {
+		pause: true,
+	},
+};

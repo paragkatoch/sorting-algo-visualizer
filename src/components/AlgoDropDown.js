@@ -1,19 +1,15 @@
 import React, { useContext, useRef } from "react";
 
-import { AppContext } from "../utils";
+import { AppContext, Algorithm } from "../utils";
 import "../styles/AlgoDropDown.scss";
 import DownArrow from "../assets/downArrow.svg";
 
-const algorithms = ["Merge Sort", "Heap Sort", "Quick Sort", "Bubble Sort"];
-let current = "Type of algorithm";
-
 export default function AlgoDropDown({ deadState }) {
 	const { algoType, running, dispatch } = useContext(AppContext);
-
 	const containerRef = useRef();
 	const optionRef = useRef();
 
-	current = algoType || current;
+	let current = algoType ? `${algoType} Sort` : "Type of algorithm";
 
 	const handleChange = (e) => {
 		optionRef.current.className = "algoDropDown_options";
@@ -51,12 +47,12 @@ export default function AlgoDropDown({ deadState }) {
 
 const AlgoDropDownUI = React.forwardRef(
 	(props, { containerRef, optionRef }) => {
-		const options = algorithms.map((algo, i) => (
+		const options = Object.keys(Algorithm).map((algo, i) => (
 			<li key={i}>
 				<button id={algo} onClick={props.handleChange}>
-					{algo}
+					{`${algo} Sort`}
 				</button>
-				{i < algorithms.length - 1 && <hr />}
+				{i < Object.keys(Algorithm).length - 1 && <hr />}
 			</li>
 		));
 
