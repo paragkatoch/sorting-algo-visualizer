@@ -38,7 +38,11 @@ export default function Header() {
 					setWait(false);
 				}, [500]);
 			}
-			dispatch({ type: ref.current.innerText });
+
+			if (ref.current.innerText === "stop" && Algorithms[algoType].pause)
+				dispatch({ type: ref.current.innerText });
+			else if (ref.current.innerText === "start")
+				dispatch({ type: ref.current.innerText });
 		}
 	};
 
@@ -66,3 +70,18 @@ const HeaderUI = React.forwardRef(({ buttonStyle, handleChange }, ref) => {
 		</header>
 	);
 });
+
+const Algorithms = {
+	"Merge Sort": {
+		pause: true,
+	},
+	"Bubble Sort": {
+		pause: true,
+	},
+	"Quick Sort": {
+		pause: false,
+	},
+	"Heap Sort": {
+		pause: false,
+	},
+};
