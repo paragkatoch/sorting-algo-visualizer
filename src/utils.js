@@ -1,9 +1,43 @@
 import React from "react";
 
+// App Context
 export const AppContext = React.createContext();
 export const inActiveButtonStyle = {
 	boxShadow: "0 0 4px 0px #565656",
 	filter: "none",
+};
+
+// Algorithms
+export const Algorithm = {
+	Bubble: {
+		pause: true,
+	},
+	Selection: {
+		pause: true,
+	},
+	Insertion: {
+		pause: true,
+	},
+	Merge: {
+		pause: true,
+	},
+	Quick: {
+		pause: false,
+	},
+};
+
+// Array Bar functions
+export const arrayGen = (size) => {
+	let array = [];
+	let range = (size > 5 ? size + 2 : size + 3) * size;
+
+	for (let i = 1; i <= range; i++) {
+		array.push([
+			Math.floor(10 + Math.random() * (Math.ceil(size / 3) * 100 - 10)),
+			0,
+		]);
+	}
+	return array;
 };
 
 export const getBarHeight = (bar, size, height) =>
@@ -28,13 +62,13 @@ export const setHeightValue = (bar, length, width) => {
 export const getBackgroundColor = (state) => {
 	switch (state) {
 		case -1:
-			return "#A31C1C"; // red
+			return "#A11E1B"; // red
 		case 1:
-			return "#1CA321"; // green
+			return "#1BA134"; // green
 		case 2:
-			return "#1C21A3"; // dark-blue
+			return "#1B22A1"; // dark-blue
 		default:
-			return "#1C62A3"; // light-blue
+			return "#1B71A1"; // light-blue
 	}
 };
 
@@ -59,34 +93,3 @@ export const getBackgroundColor = (state) => {
 	resulted array
 	[[value,0],[value,0],[value,0],[value,0],[value,0]]
 */
-
-export const arrayGen = (size) => {
-	let array = [];
-	let range = (size > 5 ? size + 2 : size + 3) * size;
-
-	for (let i = 1; i <= range; i++) {
-		array.push([
-			Math.floor(10 + Math.random() * (Math.ceil(size / 3) * 100 - 10)),
-			0,
-		]);
-	}
-	return array;
-};
-
-export const Algorithm = {
-	Bubble: {
-		pause: true,
-	},
-	Selection: {
-		pause: true,
-	},
-	Insertion: {
-		pause: true,
-	},
-	Merge: {
-		pause: true,
-	},
-	Quick: {
-		pause: false,
-	},
-};
