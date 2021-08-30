@@ -79,7 +79,7 @@ const Algorithms = {
 		pause: true,
 	},
 	"Quick Sort": {
-		pause: false,
+		pause: true,
 	},
 	"Heap Sort": {
 		pause: false,
