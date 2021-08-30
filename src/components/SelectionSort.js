@@ -35,9 +35,13 @@ export default function SelectionSort(props) {
 			if (I === -10) setI(cords.I);
 			else if (I < length - 1) {
 				timeOut(() => {
-					setArrayState([I], 1, false);
-
-					paused ? setJ(-10) : setJ(I + 1);
+					if (!paused) {
+						setArrayState([I], 1, false);
+						setJ(I + 1);
+					} else {
+						cords.J !== J && setCords({ I, J });
+						setJ(-10);
+					}
 				});
 			} else {
 				setArrayState([I], 2);
