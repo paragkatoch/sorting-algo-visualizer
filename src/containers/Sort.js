@@ -9,11 +9,12 @@ import SelectionSort from "../components/SelectionSort";
 import { AppContext } from "../utils";
 
 export default function Sort(props) {
-	const { algoType } = useContext(AppContext);
+	const { array, algoType, dispatch } = useContext(AppContext);
 	const [sorterType, setSorterType] = useState();
 
 	useEffect(() => {
 		if (sorterType !== algoType) {
+			resetArrayState();
 			setSorterType(algoType);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,5 +33,10 @@ export default function Sort(props) {
 			return <InsertionSort {...props} />;
 		default:
 			return <props.childComponent {...props.childProps} />;
+	}
+	function resetArrayState() {
+		let arr = array;
+		for (let i = 0; i < arr.length; i++) arr[i][1] = 0;
+		dispatch({ type: "array", data: arr });
 	}
 }
