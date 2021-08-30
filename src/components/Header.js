@@ -39,9 +39,14 @@ export default function Header() {
 				}, [500]);
 			}
 
-			if (ref.current.innerText === "stop" && Algorithm[algoType].pause)
-				dispatch({ type: ref.current.innerText });
-			else if (ref.current.innerText === "start")
+			if (ref.current.innerText === "stop") {
+				if (Algorithm[algoType].pause)
+					dispatch({ type: ref.current.innerText });
+				else
+					alert(
+						`Stopping functionality for ${algoType} Sort is under construction.\nAlthough the sorting is paused right now 😋.`
+					);
+			} else if (ref.current.innerText === "start")
 				dispatch({ type: ref.current.innerText });
 		}
 	};
