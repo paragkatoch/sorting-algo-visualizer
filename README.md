@@ -28,4 +28,6 @@ A _Web App_ for visualizing how sorting algorithms works under the hood using Re
 - [x] Array size +/-
 - [x] Algorithm speed +/-
 
+---
+
 #### **Have any problem or suggestion?** Head straight to [Issues](https://github.com/preIdiot/sorting-algo-visualizer/issues) and contribute to this project.
