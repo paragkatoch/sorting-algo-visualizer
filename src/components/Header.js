@@ -4,10 +4,12 @@ import { AppContext, inActiveButtonStyle, Algorithm } from "../utils";
 import "../styles/Header.scss";
 
 export default function Header() {
+	const [wait, setWait] = useState(false);
 	const [buttonStyle, setStyle] = useState(inActiveButtonStyle);
+
 	const { algoType, running, dispatch } = useContext(AppContext);
 	const ref = useRef();
-	const [wait, setWait] = useState(false);
+
 	const length = Object.keys(buttonStyle).length;
 
 	useEffect(() => {
@@ -58,7 +60,9 @@ const HeaderUI = React.forwardRef(({ buttonStyle, handleChange }, ref) => {
 	return (
 		<header className="MainHeader">
 			<div className="app_name">
-				<h1>Sorting Algorithm Visualizer</h1>
+				<a href="https://github.com/preidiot/sorting-algo-visualizer">
+					<h1>Sorting Algorithm Visualizer</h1>
+				</a>
 			</div>
 
 			<div className="divider"></div>
