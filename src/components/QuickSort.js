@@ -7,7 +7,7 @@ export default function QuickSort(props) {
 	const length = array.length;
 
 	const [, setUpdate] = useState(true);
-	const [paused, setPaused] = useState(false);
+	const [paused] = useState(false);
 	//quick
 	const [quickSort, setQuickSort] = useState(false);
 	const [pLength, setPLength] = useState();

@@ -13,6 +13,7 @@ const Slider = React.memo(({ name, value, min = 1, max = 10 }) => {
 	return (
 		<>
 			<input
+				style={{ cursor: "pointer" }}
 				className={name}
 				type="range"
 				min={min}
