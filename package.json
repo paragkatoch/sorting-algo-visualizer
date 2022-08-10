@@ -1,6 +1,5 @@
 {
 	"name": "sorting-algo-visualizer",
-	"homepage": "https://preIdiot.github.io/sorting-algo-visualizer/",
 	"version": "0.1.0",
 	"private": false,
 	"dependencies": {
