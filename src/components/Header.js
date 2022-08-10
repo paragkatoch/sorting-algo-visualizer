@@ -60,7 +60,7 @@ const HeaderUI = React.forwardRef(({ buttonStyle, handleChange }, ref) => {
 	return (
 		<header className="MainHeader">
 			<div className="app_name">
-				<a href="https://github.com/preidiot/sorting-algo-visualizer">
+				<a href="https://github.com/paragkatoch/sorting-algo-visualizer">
 					<h1>Sorting Algorithm Visualizer</h1>
 				</a>
 			</div>
