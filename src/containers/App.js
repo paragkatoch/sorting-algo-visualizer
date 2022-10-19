@@ -7,6 +7,9 @@ import ReactGA from "react-ga";
 
 import { AppContext } from "../utils";
 import "../styles/App.scss";
+import { useEffect } from "react";
+
+ReactGA.initialize(process.env.REACT_APP_GID);
 
 export default function App() {
 	// states
@@ -16,6 +19,10 @@ export default function App() {
 	const [speed, setSpeed] = useState(8); // 10 - 1
 	const [running, setRunning] = useState(false);
 	const [array, setArray] = useState([]);
+
+	useEffect(() => {
+		ReactGA.pageview(window.location.pathname);
+	}, []);
 
 	const dispatch = ({ type, data }) => {
 		switch (type) {
@@ -47,8 +54,6 @@ export default function App() {
 				console.log("What are you doing?");
 		}
 	};
-
-	ReactGA.initialize(process.env.REACT_APP_GID);
 
 	return (
 		<div className="App">
