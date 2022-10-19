@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SideBar from "./SideBar";
 import Header from "../components/Header";
 import Grid from "../containers/Grid";
+import ReactGA from "react-ga";
 
 import { AppContext } from "../utils";
 import "../styles/App.scss";
@@ -46,6 +47,8 @@ export default function App() {
 				console.log("What are you doing?");
 		}
 	};
+
+	ReactGA.initialize(process.env.REACT_APP_GID);
 
 	return (
 		<div className="App">
